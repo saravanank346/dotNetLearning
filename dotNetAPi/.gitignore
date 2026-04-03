@@ -1,0 +1,6 @@
+﻿
+# Ignore local config files
+appsettings.Development.json
+
+bin/
+obj/
