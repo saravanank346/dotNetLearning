@@ -104,11 +104,14 @@ namespace dotNetAPi.Services
                 throw new Exception("Email or Password Invalid");
             }
 
+            int roleId = await _authService.getRoleIdByUserId(user.Id);
+            Console.WriteLine(roleId + ".....roleId");
+
             // Get permissions for this user from AuthService
-            var permissions = await _authService.GetUserRolePermission(user.Id);
+            var permissions = await _authService.GetUserRolePermission(roleId);
 
             // Generate JWT token using user data + permissions
-            var token = _jwtService.GenerateJwtToken(user, permissions);
+            var token = _jwtService.GenerateJwtToken(user, permissions, roleId);
 
             // Return login response object
             return new IloginResponse

@@ -32,6 +32,8 @@
     <None Remove="Controllers\" />
     <None Remove="Dtos\" />
     <None Remove="Models\RBAC\" />
+    <None Remove="RBAC\" />
+    <None Remove="Enum\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -40,5 +42,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Dtos\" />
     <Folder Include="Models\RBAC\" />
+    <Folder Include="RBAC\" />
+    <Folder Include="Enum\" />
   </ItemGroup>
 </Project>

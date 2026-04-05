@@ -1,8 +1,12 @@
 ﻿using System;
 using dotNetAPi.Dtos;
+using dotNetAPi.Enum;
 using dotNetAPi.Models;
+using dotNetAPi.RBAC;
 using dotNetAPi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Action = dotNetAPi.Enum.Action;
 
 namespace dotNetAPi.Controllers
 {
@@ -55,6 +59,8 @@ namespace dotNetAPi.Controllers
 
 		}
 
+		[Authorize]
+		[Permission(Feature.Home , Action.Read)]
 		[HttpGet("getAllUsers")]
 		public async Task<IActionResult> getAllUsers()
 		{

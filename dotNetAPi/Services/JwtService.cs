@@ -31,7 +31,7 @@ namespace dotNetAPi.Services
         // 🔥 Method to generate JWT token
         // Input: User + permissions
         // Output: Token string
-        public string GenerateJwtToken(User user, List<string>? permissions)
+        public string GenerateJwtToken(User user, List<string>? permissions, int roleId)
         {
             // 🔹 Read config values from appsettings.json
             var key = _configuration["jwt:key"];          // secret key
@@ -50,7 +50,11 @@ namespace dotNetAPi.Services
 				new Claim("name", user.Name!),
 
                 // user email
-				new Claim("email", user.Email!)
+				new Claim("email", user.Email!),
+
+                //user roleId
+
+                new Claim("roleId", roleId.ToString())
             };
 
 

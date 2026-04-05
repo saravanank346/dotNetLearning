@@ -24,7 +24,7 @@ namespace dotNetAPi.Services
         // 🔥 Method: Get permissions for a user
         // Input: userId
         // Output: List of permissions (like "User:Create", "Report:View")
-        public async Task<List<string>?> GetUserRolePermission(int userId)
+        public async Task<List<string>?> GetUserRolePermission(int roleId)
         {
             // 🔥 LINQ Query (EF Core → converted to SQL)
             var permissions = await (
@@ -45,7 +45,7 @@ namespace dotNetAPi.Services
                 on rafm.FeatureId equals feature.Id
 
                 // Step 5: Filter by userId
-                where usrm.UserId == userId
+                where usrm.RoleId == roleId
 
                 // Step 6: Create permission string
                 // Example: "User:Create"
@@ -57,5 +57,25 @@ namespace dotNetAPi.Services
             // Return list of permissions
             return permissions;
         }
+
+        #region getRoleIdByUserId
+
+        public async Task<int> getRoleIdByUserId(int id)
+        {
+            var userDetails = await _appDBConetxt.UserRoleMappings.FirstOrDefaultAsync(x=>x.UserId==id);
+            Console.WriteLine(userDetails + ".....userDetails");
+
+            if(userDetails == null)
+            {
+                throw new Exception("User Doesnot have role!.");
+            }
+
+            int roleId = userDetails.RoleId;
+            Console.WriteLine(userDetails.RoleId + ".....roleId.....");
+
+            return roleId;
+        }
+
+        #endregion
     }
 }
